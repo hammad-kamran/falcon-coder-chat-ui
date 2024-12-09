@@ -13,8 +13,25 @@ This is a Flask-based web application that provides a simple UI to interact with
 ## Installation
 
 ### Prerequisites
-- Python 3.12
-- `pip` (Python package installer)
+- Python 3.9 or higher
+- pip (Python package installer)
+- **Ollama** library (to interact with the LLM models)
+
+## Installation
+
+### 1. Install Ollama
+
+Follow this [guide](https://dev.to/bradstondev/unlock-the-power-of-meta-llama-llm-easy-guide-to-hosting-in-your-local-dev-environment-7d) to install **Ollama**. This guide will walk you through the process of installing Ollama and setting it up in your local development environment.
+
+Once Ollama is installed, you can use it to interact with various LLM models, such as **Falcon**.
+
+### 2. Install the Falcon Model
+
+After installing Ollama, you need to install the **Falcon** model (or any other model you prefer). To install Falcon, run the following command:
+
+```bash
+ollama run falcon
+```
 
 ### Steps to Run Locally
 
