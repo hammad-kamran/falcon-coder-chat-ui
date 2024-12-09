@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falcon Coder Chat UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Falcon Coder Chat</h1>
+        <form method="POST" action="/">
+            <label for="model-selector">Select Model:</label>
+            <select id="model-selector" name="model">
+                <option value="falcon" {% if selected_model == 'falcon' %}selected{% endif %}>Falcon</option>
+                <option value="another_model" {% if selected_model == 'another_model' %}selected{% endif %}>Another Model</option>
+            </select>
+            <div class="chat-container" id="chat-history">
+                {% for entry in chat_history %}
+                    <div class="user-input"><strong>You:</strong> {{ entry['input'] }}</div>
+                    <div class="response {% if 'Error' in entry['response'] %}error{% endif %}">
+                        <strong>{{ selected_model.title() }}:</strong> {{ entry['response'] }}
+                    </div>
+                {% endfor %}
+            </div>
+            <textarea id="input" name="input" required placeholder="Type your query here..."></textarea>
+            <button type="submit" onclick="showLoading()">Submit</button>
+            <div id="spinner" class="loading-spinner"></div>
+        </form>
+        <div class="action-buttons">
+            <form method="POST" action="/clear">
+                <button type="submit">Clear Chat</button>
+            </form>
+            <form method="GET" action="/download">
+                <button type="submit">Download Chat</button>
+            </form>
+        </div>
+        {% if error_message %}
+            <div class="error-message">{{ error_message }}</div>
+        {% endif %}
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById('spinner').style.display = 'inline-block';
+        }
+    </script>
+</body>
+</html>
